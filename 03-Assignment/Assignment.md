@@ -12,6 +12,11 @@ export CFLAGS="-I/usr/local/include"
 export LDFLAGS="-L/usr/local/lib"
 ```
 
+Install PostgreSQL
+```
+sudo apt install postgresql-client postgresql libpq-dev build-essential g++ libpq5 
+```
+
 Install GnuCobol 
 ```
 sudo apt install gnucobol
@@ -24,7 +29,7 @@ unzip v1.3.zip
 cd Open-COBOL-ESQL-1.3
 ./configure
 make
-make install
+sudo make install
 ```
 
 
