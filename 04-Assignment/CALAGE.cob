@@ -1,13 +1,10 @@
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. CALCAGE.
+       PROGRAM-ID. CALCAGE-SEP-COMP.
       * 
        ENVIRONMENT DIVISION.
            INPUT-OUTPUT SECTION.
               FILE-CONTROL.
               SELECT EMPLOYEE ASSIGN TO 'input.dta'
-              ORGANIZATION IS LINE SEQUENTIAL.
-      *
-              SELECT EMPOUT ASSIGN TO 'output.dta'
               ORGANIZATION IS LINE SEQUENTIAL.
       *
        DATA DIVISION.
@@ -24,23 +21,12 @@
                  07 EMPDOBS1  PIC        A(1).
                  07 EMPDOBD   PIC        9(2).
       *
-           FD EMPOUT.
-           01 EMPOUT-FILE.
-              05 EMPOID       PIC        9(3).
-              05 EMPOFNM      PIC       A(15).
-              05 EMPOLNM      PIC       A(20).
-              05 EMPODOB      PIC       A(10).
-              05 EMPOAGE      PIC        Z(3).
-      *
            WORKING-STORAGE SECTION.
            01 WS-EMP-EOF      PIC        A(1).
-      *~
-           01 WS-TODAY.
-              05 WS-TODAY-Y   PIC        9(4).
-              05 WS-TODAY-M   PIC        9(2).
-              05 WS-TODAY-D   PIC        9(2).
-      *
-           01 WS-AGE          PIC        9(3).
+           01 AGE             PIC        9(3).
+
+       COPY "CALC_AGE_DEF.cob".
+
       *
        PROCEDURE DIVISION.
        MAIN.
@@ -53,9 +39,7 @@
       * ================================================================
        INITIALIZE-PARA.
            OPEN INPUT EMPLOYEE.
-           OPEN OUTPUT EMPOUT.
            MOVE ' ' TO WS-EMP-EOF.
-           MOVE FUNCTION CURRENT-DATE TO WS-TODAY.
 
       * ================================================================
       * PROCESS-PARA
@@ -66,30 +50,27 @@
            END-READ.
            PERFORM UNTIL WS-EMP-EOF = 'Y'
              
-             COMPUTE WS-AGE = WS-TODAY-Y - EMPDOBY - 1
-             IF WS-TODAY-M > EMPDOBM
-               COMPUTE WS-AGE = WS-AGE + 1
-             ELSE 
-               IF WS-TODAY-M = EMPDOBM
-                 IF WS-TODAY-D >= EMPDOBD
-                   COMPUTE WS-AGE = WS-AGE + 1
-                 END-IF
-               END-IF
-             END-IF
-
-             MOVE EMPLOYEE-FILE TO EMPOUT-FILE
-             MOVE WS-AGE TO EMPOAGE
-             WRITE EMPOUT-FILE
+             MOVE EMPDOBM TO CA-MONTH
+             MOVE EMPDOBD TO CA-DAY
+             MOVE EMPDOBY TO CA-YEAR
+             PERFORM CALCULATE-AGE-PARA
+             MOVE CA-AGE TO AGE
+             
+             DISPLAY EMPFNM EMPLNM AGE
 
              READ EMPLOYEE INTO EMPLOYEE-FILE
                   AT END MOVE 'Y' TO WS-EMP-EOF 
              END-READ
+
            END-PERFORM.
 
+      * ================================================================
+      * COPY IN AGE CALC PARAGRAPH
+      * ================================================================
+       COPY "CALC_AGE_PARA.cob".
       * ================================================================
       * TERMINATE-PARA
       * ================================================================
        TERMINATE-PARA.
            CLOSE EMPLOYEE.
-           CLOSE EMPOUT.
            STOP RUN.
