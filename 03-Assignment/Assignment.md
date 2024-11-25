@@ -6,7 +6,7 @@ We have worked with flat files and done input and output files. Now let's work w
 
 Add the following to your .bashrc
 ```
-export COBCPY=/home/<yourName>/Open-COBOL-ESQL-1.3/copy
+export COBCPY=/home/<yourName>/Open-COBOL-ESQL-1.3/copy:.
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export CFLAGS="-I/usr/local/include"
 export LDFLAGS="-L/usr/local/lib"
