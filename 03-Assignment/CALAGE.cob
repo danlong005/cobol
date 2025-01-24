@@ -16,8 +16,8 @@
            DISPLAY "*** STARTING ***".
 
       *    CONNECT
-           MOVE "cobol@localhost" TO DBNAME.
-           MOVE "admin"           TO USERNAME.
+           MOVE "cobol@172.21.160.1" TO DBNAME.
+           MOVE "admin"        TO USERNAME.
            MOVE "password"        TO PASSWD.
       
            EXEC SQL 
@@ -34,7 +34,7 @@
       * ================================================================
        ERROR-RTN.
            DISPLAY "*** SQL ERROR ***".
-           DISPLAY "SQLCODE: " SQLCODE " " NO ADVANCING.
+           DISPLAY "SQLCODE: " SQLSTATE " " NO ADVANCING.
            PERFORM TERMINATE-PARA.
       * ================================================================
       * INITIALIZE-PARA 
