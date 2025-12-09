@@ -1,0 +1,18 @@
+#line 1 "/home/dlong/Source/repos/cobol/00-Setup/HELLO.cob"
+
+
+
+
+
+
+
+
+
+ IDENTIFICATION DIVISION.
+ PROGRAM-ID. HELLO.
+ ENVIRONMENT DIVISION.
+ PROCEDURE DIVISION.
+ MAIN.
+ DISPLAY 'HELLO WORLD'.
+ STOP RUN.
+

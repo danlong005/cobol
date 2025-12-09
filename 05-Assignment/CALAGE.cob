@@ -13,6 +13,7 @@
            01 EMP-FNAME       PIC        X(20) VALUE SPACE.
            01 EMP-LNAME       PIC        X(20) VALUE SPACE.
            01 EMP-DOB         PIC        X(10) VALUE SPACE.
+           01 DB-CON-STR      PIC        X(50).
            EXEC SQL END DECLARE SECTION END-EXEC.
       *
            EXEC SQL INCLUDE SQLCA END-EXEC.
@@ -26,13 +27,9 @@
        PROCEDURE DIVISION.
        MAIN.
 
-      *    CONNECT
-           MOVE "cobol@localhost" TO DBNAME.
-           MOVE "admin"           TO USERNAME.
-           MOVE "password"        TO PASSWD.
-
+           MOVE 'admin/password@COBODBC' TO DB-CON-STR.
            EXEC SQL 
-               CONNECT :USERNAME IDENTIFIED BY :PASSWD USING :DBNAME
+               CONNECT TO :DB-CON-STR
            END-EXEC.
            IF SQLCODE NOT = ZERO PERFORM ERROR-RTN.
 
@@ -86,5 +83,8 @@
       * TERMINATE-PARA
       * ================================================================
        TERMINATE-PARA.
+           EXEC SQL 
+               CONNECT RESET
+           END-EXEC.
            CLOSE EMPLOYEE.
            STOP RUN.

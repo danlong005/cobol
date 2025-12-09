@@ -3,9 +3,7 @@
        DATA DIVISION.
        WORKING-STORAGE SECTION.
        EXEC SQL BEGIN DECLARE SECTION END-EXEC.
-       01 DBNAME          PIC        X(30) VALUE SPACE.
-       01 USERNAME        PIC        X(30) VALUE SPACE.
-       01 PASSWD          PIC        X(10) VALUE SPACE.
+       01 DB-CON-STR      PIC        X(50).
        01 EMP-COUNT       PIC        9(04).
        EXEC SQL END DECLARE SECTION END-EXEC.
       *
@@ -15,13 +13,9 @@
        MAIN.
            DISPLAY "*** STARTING ***".
 
-      *    CONNECT
-           MOVE "cobol@localhost" TO DBNAME.
-           MOVE "admin"           TO USERNAME.
-           MOVE "password"        TO PASSWD.
-      
+           MOVE 'admin/password@COBODBC' TO DB-CON-STR.
            EXEC SQL 
-               CONNECT :USERNAME IDENTIFIED BY :PASSWD USING :DBNAME
+               CONNECT TO :DB-CON-STR
            END-EXEC.
            IF SQLCODE NOT = ZERO PERFORM ERROR-RTN.
 
@@ -54,7 +48,7 @@
            DISPLAY "TOTAL EMPLOYEES: " EMP-COUNT.
 
            EXEC SQL
-               DISCONNECT ALL
+               CONNECT RESET
            END-EXEC. 
                    
 
