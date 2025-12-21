@@ -1,0 +1,15 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. PFMPGM.
+       ENVIRONMENT DIVISION.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       PROCEDURE DIVISION.
+       PARA-A.
+           DISPLAY 'PARA A'.
+           PERFORM PARA-B THRU PARA-C
+           STOP RUN.
+
+       PARA-B.
+           DISPLAY 'PARA B'.
+       PARA-C.
+           DISPLAY 'PARA C'.

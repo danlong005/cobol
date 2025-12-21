@@ -1,0 +1,15 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. IFSPGM.
+       ENVIRONMENT DIVISION.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+           01 WS-ONE PIC  9(5).
+       PROCEDURE DIVISION.
+           MOVE 1 TO WS-ONE.
+
+           IF WS-ONE = 1 THEN
+              DISPLAY 'YAY! IT IS ONE'
+           ELSE
+              DISPLAY 'AW, IT IS NOT ONE'.
+
+           STOP RUN.

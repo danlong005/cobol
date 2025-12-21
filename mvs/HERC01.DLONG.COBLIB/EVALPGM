@@ -1,0 +1,16 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. EVALPGM.
+       ENVIRONMENT DIVISION.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+           01 WS-NUM PIC 9(3) VALUE 0.
+       PROCEDURE DIVISION.
+           EVALUATE WS-NUM
+             WHEN WS-NUM > 0
+               DISPLAY 'WS-NUM IS GREATER THAN 0'
+             WHEN WS-NUM < 0
+               DISPLAY 'WS-NUM IS LESS THAN 0'
+             WHEN OTHER
+               DISPLAY 'WS-NUM IS ZERO'
+           END-EVALUATE.
+           STOP RUN.

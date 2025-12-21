@@ -1,0 +1,16 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. NESTEDIF.
+       ENVIRONMENT DIVISION.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+           01 WS-NUM1 PIC 9(2) VALUE 0.
+       PROCEDURE DIVISION.
+           DISPLAY 'NESTED IF PRACTICE'.
+           IF WS-NUM1 = 0
+              DISPLAY 'WS-NUM1 IS ZERO'
+           ELSE
+              IF WS-NUM1 > 10
+                 DISPLAY 'WS-NUM1 IS GREATER THAN 10'
+              ELSE
+                 DISPLAY 'WS-NUM1 IS LESS THAN 10'.
+           STOP RUN.

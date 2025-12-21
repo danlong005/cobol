@@ -1,0 +1,16 @@
+//COMPILE JOB  (SETUP),
+//             'COMPILE COBOL',
+//             CLASS=A,
+//             MSGCLASS=H,
+//             MSGLEVEL=(1,1)
+//* ==================================================================
+//* NAME: HERC01.DLONG.JCLLIB(COMPILE)
+//* DESC: COMPILE THE COBOL PROGRAM
+//* ==================================================================
+//IFSPGM   EXEC COBUCLG
+//COB.SYSIN DD DSNAME=HERC01.DLONG.COBLIB(HELLO),DISP=SHR
+//LKED.SYSLMOD DD DSNAME=HERC01.DLONG.LOADLIB(HELLO),DISP=SHR
+//LKED.SYSLIB DD DSNAME=SYS1.COBLIB,DISP=SHR
+//            DD DSNAME=SYS1.LINKLIB,DISP=SHR
+//SYSPRINT DD SYSOUT=A
+//

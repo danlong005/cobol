@@ -1,0 +1,14 @@
+//RUNJCL  JOB  (SETUP),
+//             'RUN PGM',
+//             CLASS=A,
+//             MSGCLASS=H,
+//             MSGLEVEL=(1,1)
+//* ===============================================================
+//* NAME: HERC01.DLONG.JCLLIB(RUNPGM)
+//* DESC: RUN A COBOL PROGRAM
+//* ===============================================================
+//RUNPGM  EXEC PGM=PFMVPGM
+//STEPLIB DD DSNAME=HERC01.DLONG.LOADLIB,DISP=SHR
+//SYSOUT   DD SYSOUT=*
+//SYSPRINT DD SYSOUT=A
+//
