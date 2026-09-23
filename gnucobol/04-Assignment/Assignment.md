@@ -10,13 +10,13 @@ assignment we will have the same input file. We will still calculate the
 age of each employee. However, we are putting the calculation into a 
 copybook.
 
-# OceSQL shortcoming
+# Precompiler note
 ```
-Do NOT place the copybook for the paragraph on the last line of the 
-code. For some reason OceSQL will triple the copy in it's translation.
+OceSQL, the precompiler this used to be built with, tripled a copybook
+placed on the last line of the code. esqlOC doesn't have that problem.
 
-We aren't using SQL in this example so we could rip out the usage of 
-OceSQL. 
+We aren't using SQL in this example, but it still goes through esqlOC so
+every assignment builds the same way.
 ```
 
 

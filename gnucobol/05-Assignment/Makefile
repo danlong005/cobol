@@ -16,4 +16,3 @@ debug:
 
 clean:
 	rm -f $(PGM) $(PGM).c $(PGM).c.h $(PGM).c.l.h $(PGM).i $(PGM).cbl
-	rm -f output.dta

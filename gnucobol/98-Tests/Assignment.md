@@ -1,40 +1,31 @@
-# Assignment 03
+# Tests
 
-We have worked with flat files and done input and output files. Now let's work with SQL in our program. You will find the database.sql file will have all the sql needed to create your database. Once that has been ran you can write your program.
+A scratch program for checking the SQL setup. It builds the connect string
+from the DSN, user name and password with STRING, connects, counts the
+employees and disconnects, showing the SQLCODE after each step.
 
-# Linux Setup with PostgreSQL
-
-Add the following to your .bashrc
+# Setup
+This uses the same esqlOC, PostgreSQL and ODBC setup as Assignment 03. Follow
+the steps in [03-Assignment/Assignment.md](../03-Assignment/Assignment.md),
+then load the table
 ```
-export COBCPY=/home/<yourName>/Open-COBOL-ESQL-1.3/copy:.
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-export CFLAGS="-I/usr/local/include"
-export LDFLAGS="-L/usr/local/lib"
-```
-
-Install PostgreSQL
-```
-sudo apt install postgresql-client postgresql libpq-dev build-essential g++ libpq5 
+PGPASSWORD=password psql -h localhost -U admin -d cobol -f database.sql
 ```
 
-Install GnuCobol 
+Build and run
 ```
-sudo apt install gnucobol
-```
-
-Download and Install OceSQL
-```
-wget https://github.com/opensourcecobol/Open-COBOL-ESQL/archive/refs/tags/v1.3.zip
-unzip v1.3.zip
-cd Open-COBOL-ESQL-1.3
-./configure
 make
-sudo make install
+./CALAGE
 ```
-
 
 # Output
 ```
 *** STARTING ***
-TOTAL EMPLOYEES: 0003
+*** SQL CODE ***
+SQLCODE: +0000000000 
+NUMBER OF EMPLOYEES: 000000003
+*** SQL CODE ***
+SQLCODE: +0000000000 
+*** SQL CODE ***
+SQLCODE: +0000000000 
 ```

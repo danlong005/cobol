@@ -4,13 +4,10 @@ We have now done a little SQL and also used CopyBooks. In this Assignment
 we will combine both of those things. We will use SQL to read the data from 
 the database table. Then we will use the CopyBook to calculate the age.
 
-# OceSQL shortcoming
+# Precompiler note
 ```
-Do NOT place the copybook for the paragraph on the last line of the 
-code. For some reason OceSQL will triple the copy in it's translation.
-
-We aren't using SQL in this example so we could rip out the usage of 
-OceSQL. 
+OceSQL, the precompiler this used to be built with, tripled a copybook
+placed on the last line of the code. esqlOC doesn't have that problem.
 ```
 
 
