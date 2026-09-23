@@ -1,0 +1,11 @@
+# Compiled programs
+CALAGE
+HELLO
+FETCHTBL
+INSERTTBL
+
+# cobc intermediate files (kept when building with -g / debugging)
+*.c
+*.c.h
+*.c.l.h
+*.i
