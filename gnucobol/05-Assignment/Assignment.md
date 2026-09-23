@@ -15,7 +15,7 @@ OceSQL.
 
 
 # Database
-Load the table with `database.sql` (this replaces the employees table from Assignment 03, so 03 will then report 3 employees):
+Load the table with `database.sql`. It drops and recreates the employees table, the same as Assignment 03's script, so either one can be run again safely:
 ```
 PGPASSWORD=password psql -h localhost -U admin -d cobol -f database.sql
 ```
