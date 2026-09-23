@@ -28,7 +28,10 @@
       * ================================================================
        ERROR-RTN.
            DISPLAY "*** SQL ERROR ***".
-           DISPLAY "SQLCODE: " SQLCODE " " NO ADVANCING.
+           DISPLAY "SQLCODE: " SQLCODE.
+           IF SQLERRML > 0
+             DISPLAY "SQLERRMC: " SQLERRMC(1:SQLERRML)
+           END-IF.
            PERFORM TERMINATE-PARA.
       * ================================================================
       * INITIALIZE-PARA 

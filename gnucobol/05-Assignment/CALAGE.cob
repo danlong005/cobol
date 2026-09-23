@@ -21,6 +21,7 @@
            EXEC SQL INCLUDE SQLCA END-EXEC.
       *
            01 WS-EMP-EOF      PIC        A(1).
+           01 WS-CUR-OPEN     PIC        A(1)  VALUE 'N'.
            01 AGE             PIC        9(3).
 
        COPY "CALC_AGE_DEF.cob".
@@ -44,7 +45,10 @@
       * ================================================================
        ERROR-RTN.
            DISPLAY "*** SQL ERROR ***".
-           DISPLAY "SQLCODE: " SQLCODE " " NO ADVANCING.
+           DISPLAY "SQLCODE: " SQLCODE.
+           IF SQLERRML > 0
+             DISPLAY "SQLERRMC: " SQLERRMC(1:SQLERRML)
+           END-IF.
            PERFORM TERMINATE-PARA.
 
       * ================================================================
@@ -62,6 +66,7 @@
                OPEN EMPCUR
            END-EXEC.
            IF SQLCODE NOT = ZERO PERFORM ERROR-RTN.
+           MOVE 'Y' TO WS-CUR-OPEN.
            MOVE ' ' TO WS-EMP-EOF.
 
       * ================================================================
@@ -105,9 +110,12 @@
       * TERMINATE-PARA
       * ================================================================
        TERMINATE-PARA.
-           EXEC SQL
-               CLOSE EMPCUR
-           END-EXEC.
+      *    ERROR-RTN can get here before the cursor was opened
+           IF WS-CUR-OPEN = 'Y'
+             EXEC SQL
+                 CLOSE EMPCUR
+             END-EXEC
+           END-IF.
            EXEC SQL
                CONNECT RESET
            END-EXEC.
