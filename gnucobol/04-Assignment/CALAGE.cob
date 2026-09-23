@@ -56,7 +56,7 @@
              PERFORM CALCULATE-AGE-PARA
              MOVE CA-AGE TO AGE
              
-             DISPLAY EMPFNM EMPLNM AGE
+             DISPLAY EMPLOYEE-FILE " " AGE
 
              READ EMPLOYEE INTO EMPLOYEE-FILE
                   AT END MOVE 'Y' TO WS-EMP-EOF 
