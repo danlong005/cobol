@@ -1,20 +1,22 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. CALCAGE-SQL-CB.
-      * 
-       ENVIRONMENT DIVISION.
-           INPUT-OUTPUT SECTION.
       *
        DATA DIVISION.
            WORKING-STORAGE SECTION.
            EXEC SQL BEGIN DECLARE SECTION END-EXEC.
-           01 DBNAME          PIC        X(30) VALUE SPACE.
-           01 USERNAME        PIC        X(30) VALUE SPACE.
-           01 PASSWD          PIC        X(10) VALUE SPACE.
-           01 EMP-FNAME       PIC        X(20) VALUE SPACE.
-           01 EMP-LNAME       PIC        X(20) VALUE SPACE.
-           01 EMP-DOB         PIC        X(10) VALUE SPACE.
            01 DB-CON-STR      PIC        X(50).
+           01 EMP-ID          PIC        9(3).
+           01 EMP-FNAME       PIC        X(15).
+           01 EMP-LNAME       PIC        X(20).
+           01 EMP-DOB         PIC        X(10).
            EXEC SQL END DECLARE SECTION END-EXEC.
+      *    esqlOC can't bind a group item, so split the date here
+           01 EMP-DOB-PARTS REDEFINES EMP-DOB.
+              05 EMP-DOBY     PIC        9(4).
+              05 EMP-DOBS     PIC        X(1).
+              05 EMP-DOBM     PIC        9(2).
+              05 EMP-DOBS1    PIC        X(1).
+              05 EMP-DOBD     PIC        9(2).
       *
            EXEC SQL INCLUDE SQLCA END-EXEC.
       *
@@ -28,7 +30,7 @@
        MAIN.
 
            MOVE 'admin/password@COBODBC' TO DB-CON-STR.
-           EXEC SQL 
+           EXEC SQL
                CONNECT TO :DB-CON-STR
            END-EXEC.
            IF SQLCODE NOT = ZERO PERFORM ERROR-RTN.
@@ -44,36 +46,56 @@
            DISPLAY "*** SQL ERROR ***".
            DISPLAY "SQLCODE: " SQLCODE " " NO ADVANCING.
            PERFORM TERMINATE-PARA.
-                      
+
       * ================================================================
-      * INITIALIZE-PARA 
+      * INITIALIZE-PARA
       * ================================================================
        INITIALIZE-PARA.
-           OPEN INPUT EMPLOYEE.
+           EXEC SQL
+               DECLARE EMPCUR CURSOR FOR
+               SELECT ID, FIRST_NAME, LAST_NAME,
+                      TO_CHAR(DATE_OF_BIRTH, 'YYYY-MM-DD')
+               FROM EMPLOYEES
+               ORDER BY ID
+           END-EXEC.
+           EXEC SQL
+               OPEN EMPCUR
+           END-EXEC.
+           IF SQLCODE NOT = ZERO PERFORM ERROR-RTN.
            MOVE ' ' TO WS-EMP-EOF.
 
       * ================================================================
       * PROCESS-PARA
       * ================================================================
        PROCESS-PARA.
-           READ EMPLOYEE INTO EMPLOYEE-FILE 
-                AT END MOVE 'Y' TO WS-EMP-EOF 
-           END-READ.
+           PERFORM FETCH-PARA.
            PERFORM UNTIL WS-EMP-EOF = 'Y'
-             
-             MOVE EMPDOBM TO CA-MONTH
-             MOVE EMPDOBD TO CA-DAY
-             MOVE EMPDOBY TO CA-YEAR
+
+             MOVE EMP-DOBM TO CA-MONTH
+             MOVE EMP-DOBD TO CA-DAY
+             MOVE EMP-DOBY TO CA-YEAR
              PERFORM CALCULATE-AGE-PARA
              MOVE CA-AGE TO AGE
-             
-             DISPLAY EMPFNM EMPLNM AGE
 
-             READ EMPLOYEE INTO EMPLOYEE-FILE
-                  AT END MOVE 'Y' TO WS-EMP-EOF 
-             END-READ
+             DISPLAY EMP-ID EMP-FNAME EMP-LNAME EMP-DOB " " AGE
+
+             PERFORM FETCH-PARA
 
            END-PERFORM.
+
+      * ================================================================
+      * FETCH-PARA
+      * ================================================================
+       FETCH-PARA.
+           EXEC SQL
+               FETCH EMPCUR
+               INTO :EMP-ID, :EMP-FNAME, :EMP-LNAME, :EMP-DOB
+           END-EXEC.
+           IF SQLCODE = 100
+             MOVE 'Y' TO WS-EMP-EOF
+           ELSE
+             IF SQLCODE NOT = ZERO PERFORM ERROR-RTN
+           END-IF.
 
       * ================================================================
       * COPY IN AGE CALC PARAGRAPH
@@ -83,8 +105,10 @@
       * TERMINATE-PARA
       * ================================================================
        TERMINATE-PARA.
-           EXEC SQL 
+           EXEC SQL
+               CLOSE EMPCUR
+           END-EXEC.
+           EXEC SQL
                CONNECT RESET
            END-EXEC.
-           CLOSE EMPLOYEE.
            STOP RUN.

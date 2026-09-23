@@ -36,5 +36,5 @@ sudo make install
 # Output
 ```
 *** STARTING ***
-TOTAL EMPLOYEES: 0002
+TOTAL EMPLOYEES: 0003
 ```

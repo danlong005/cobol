@@ -61,7 +61,7 @@ make
 # Output
 ```
 *** STARTING ***
-TOTAL EMPLOYEES: 0002
+TOTAL EMPLOYEES: 0003
 ```
 
 ## Hiding the OCSQL log lines

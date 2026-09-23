@@ -1,4 +1,4 @@
-# Assignment 04
+# Assignment 05
 
 We have now done a little SQL and also used CopyBooks. In this Assignment
 we will combine both of those things. We will use SQL to read the data from 
@@ -15,6 +15,11 @@ OceSQL.
 
 
 # Database
+Load the table with `database.sql` (this replaces the employees table from Assignment 03, so 03 will then report 3 employees):
+```
+PGPASSWORD=password psql -h localhost -U admin -d cobol -f database.sql
+```
+
 ```
 CREATE TABLE public.employees (
 	id int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
