@@ -15,4 +15,4 @@ debug:
 	esqlOC -static -o $(PGM).cbl $(PGM).cob
 
 clean:
-	rm $(PGM) $(PGM).c $(PGM).c.h $(PGM).c.l.h $(PGM).i rm $(PGM).cbl
+	rm -f $(PGM) $(PGM).c $(PGM).c.h $(PGM).c.l.h $(PGM).i $(PGM).cbl

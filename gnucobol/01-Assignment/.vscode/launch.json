@@ -13,10 +13,14 @@
                 "-x",
                 "-locsql",
                 "-L",
-                "/usr/lib64/libocsql.so",
+                "/usr/local/lib",
                 "-q"
             ],
-            "preLaunchTask": "setenv"
+            "env": {
+                "COB_LIBRARY_PATH": "/usr/local/lib",
+                "COB_LDFLAGS": "-Wl,--no-as-needed",
+                "COB_PRELOAD": "libocsql"
+            }
         }
     ]
 }

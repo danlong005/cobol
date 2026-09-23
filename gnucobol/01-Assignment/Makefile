@@ -1,11 +1,18 @@
 PGM=CALAGE
-FLAGS=-x -locesql -lpq
+FLAGS=-x -locsql -L /usr/local/lib -q
+
+export COB_LIBRARY_PATH=/usr/local/lib
+export COB_LDFLAGS=-Wl,--no-as-needed
+export COB_PRELOAD=libocsql
 
 out:
-	ocesql $(PGM).cob $(PGM).cbl
+	esqlOC -static -o $(PGM).cbl $(PGM).cob
 	cobc $(FLAGS) $(PGM).cbl
 
 	rm $(PGM).cbl
 
+debug:
+	esqlOC -static -o $(PGM).cbl $(PGM).cob
+
 clean:
-	rm $(PGM)
+	rm -f $(PGM) $(PGM).c $(PGM).c.h $(PGM).c.l.h $(PGM).i $(PGM).cbl
