@@ -63,4 +63,22 @@ make
 *** STARTING ***
 TOTAL EMPLOYEES: 0002
 ```
-The esqlOC runtime also prints `OCSQL:` log lines around this output.
+
+## Hiding the OCSQL log lines
+By default the esqlOC runtime also prints `OCSQL:` log lines (to stderr) around this output.
+The `OCSQL_LOGLEVEL` environment variable controls how much it prints. Add this to your .bashrc to turn it off:
+```
+export OCSQL_LOGLEVEL=0
+```
+
+| OCSQL_LOGLEVEL | What is printed |
+|---|---|
+| `0` | Nothing |
+| `1` | Connected / connection closed |
+| `9` | Also the DSN connect line and SQL error details (e.g. a failed login) |
+| not set, or `901` and up | Everything, including each PREPARE / EXECUTE / FETCH |
+
+Level `0` also hides the library's error messages, so when a program fails with `*** SQL ERROR ***` run it once with more logging:
+```
+OCSQL_LOGLEVEL=9 ./CALAGE
+```
