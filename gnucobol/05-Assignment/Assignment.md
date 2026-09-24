@@ -32,8 +32,9 @@ insert into employees (first_name, last_name, date_of_birth) values
 ```
 
 # Output
+The ages are as of 2026-09-23, so they depend on the date you run it.
 ```
-001Clark          Kent               1980-01-01 042
-002Tony           Stark              1999-05-04 022
-003Bruce          Wayne              1965-07-04 056
+001Clark          Kent                1980-01-01 046
+002Tony           Stark               1999-05-04 027
+003Bruce          Wayne               1965-07-04 061
 ```

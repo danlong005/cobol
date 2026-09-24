@@ -4,7 +4,7 @@
       * 
       * Run the following commands to compile and run the program.
       * ----------------------------------------------------------------
-      * $ cobc -x HELLO.cbl
+      * $ cobc -x HELLO.cob
       * $ ./HELLO
       * ================================================================ 
        IDENTIFICATION DIVISION.

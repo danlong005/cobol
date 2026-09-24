@@ -1,4 +1,3 @@
-create database cobol;
 \c cobol
 
 drop table if exists public.employees;

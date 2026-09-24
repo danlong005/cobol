@@ -47,16 +47,15 @@
                INTO :EMP-COUNT
                FROM EMPLOYEES
            END-EXEC.
+           IF SQLCODE NOT = ZERO PERFORM ERROR-RTN.
 
            DISPLAY "TOTAL EMPLOYEES: " EMP-COUNT.
-
-           EXEC SQL
-               CONNECT RESET
-           END-EXEC. 
-                   
 
       * ================================================================
       * TERMINATE-PARA
       * ================================================================
        TERMINATE-PARA.
+           EXEC SQL
+               CONNECT RESET
+           END-EXEC.
            STOP RUN.

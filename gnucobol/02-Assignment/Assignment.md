@@ -4,14 +4,15 @@ Now that we have read from a flat file and put the data out to the screen. It is
 
 # Input
 ```
-001Clark          Kent               1980-01-01
-002Tony           Stark              1999-05-04
-003Bruce          Wayne              1965-07-04
+001Clark          Kent                1980-01-01
+002Tony           Stark               1999-05-04
+003Bruce          Wayne               1965-07-04
 ```
 
 # Output
+The ages are as of 2026-09-23, so they depend on the date you run it.
 ```
-001Clark          Kent               1980-01-01 42
-002Tony           Stark              1999-05-04 22
-003Bruce          Wayne              1965-07-04 56
+001Clark          Kent                1980-01-01 46
+002Tony           Stark               1999-05-04 27
+003Bruce          Wayne               1965-07-04 61
 ```

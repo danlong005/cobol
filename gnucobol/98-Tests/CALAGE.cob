@@ -57,6 +57,9 @@
        ERROR-RTN.
            DISPLAY "*** SQL CODE ***".
            DISPLAY "SQLCODE: " SQLCODE " ".
+           IF SQLERRML > 0
+             DISPLAY "SQLERRMC: " SQLERRMC(1:SQLERRML)
+           END-IF.
            PERFORM TERMINATE-PARA.
 
       * ================================================================
