@@ -1,6 +1,7 @@
-# Compiled programs
+# Compiled programs and subprogram modules
 CALAGE
 HELLO
+*.so
 
 # cobc intermediate files (kept when building with -g / debugging)
 *.c
