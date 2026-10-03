@@ -104,7 +104,7 @@
                FROM EMPLOYEES
                WHERE ID > :LAST-ID
                ORDER BY ID
-           END-EXEC.
+           END-EXEC
            EXEC SQL
                OPEN EMPCUR
            END-EXEC.

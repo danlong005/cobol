@@ -68,7 +68,7 @@
                       TO_CHAR(DATE_OF_BIRTH, 'YYYY-MM-DD')
                FROM EMPLOYEES
                ORDER BY ID
-           END-EXEC.
+           END-EXEC
            EXEC SQL
                OPEN EMPCUR
            END-EXEC.
